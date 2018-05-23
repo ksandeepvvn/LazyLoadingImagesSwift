@@ -17,11 +17,8 @@ class PhotoModelController: NSObject {
         let fetchImageCompletionHandler = { [weak self] (serviceResponse: ServiceResponse) -> Void in
             guard self != nil  else { return }
             if let error = serviceResponse.responseError {
-                
                 completionHandler(nil, error as NSError?)
-                
                 Swift.print("Error while searching area = \(error.userInfo[NSLocalizedDescriptionKey] ?? "unknown")")
-                
                 return
             }
             if let image = serviceResponse.image {
@@ -30,7 +27,6 @@ class PhotoModelController: NSObject {
                 completionHandler(nil, nil)
             }
         }
-        
         SessionManager.sharedInstance.sendServerRequest(method: .get,
                                                         baseURL: fromUrl,
                                                         endPoint: "",

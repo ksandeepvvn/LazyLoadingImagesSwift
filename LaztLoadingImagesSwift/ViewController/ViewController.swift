@@ -49,9 +49,16 @@ class ViewController: UIViewController {
                     if let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell {
                         if let thumbnailURL = photoInfo.thumbnailURL {
                             self.modelController.fetchImage(fromUrl: thumbnailURL, completionHandler: { (image, error) in
-                                photoInfo.thumbnailImage = image
+                              //  photoInfo.thumbnailImage = image
                                 DispatchQueue.main.async {
+                                if(image == nil)
+                                {
+                                 cell.cellImage?.image = UIImage(named: "PlaceHolder")
+                                    }
+                                    else
+                                {
                                     cell.cellImage?.image = image
+                                    }
                                 }
                             })
                         }
