@@ -10,8 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var tableView: UITableView!
     
+    var refreshControl: UIRefreshControl!
     var modelController = PhotoModelController()
     
     override func viewDidLoad() {
@@ -19,20 +22,36 @@ class ViewController: UIViewController {
         
         self.tableView.estimatedRowHeight = 180
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.tintColor = UIColor.red
+        
+        refreshControl = UIRefreshControl()
+        tableView.addSubview(refreshControl)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull To Referesh")
+        refreshControl.tintColor = UIColor.red
+        refreshControl.addTarget(self, action: #selector(Refresh), for: .valueChanged)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         self.modelController.fetchJson(completionHandler: { [weak self](error) in
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self else {
+                return }
+            
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.hidesWhenStopped = true
             strongSelf.tableView.reloadData()
             
         })
     }
     
+    @objc func Refresh()
+    {
+        tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.tableView.reloadData()
     }
     
@@ -49,7 +68,6 @@ class ViewController: UIViewController {
                     if let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell {
                         if let thumbnailURL = photoInfo.thumbnailURL {
                             self.modelController.fetchImage(fromUrl: thumbnailURL, completionHandler: { (image, error) in
-                              //  photoInfo.thumbnailImage = image
                                 DispatchQueue.main.async {
                                 if(image == nil)
                                 {
@@ -100,7 +118,7 @@ extension ViewController: UITableViewDataSource {
                 }
             }
         }
-        
+        refreshControl.endRefreshing()
         return tabelCell
     }
     
