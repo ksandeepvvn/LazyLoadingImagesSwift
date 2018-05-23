@@ -71,7 +71,6 @@ extension ViewController: UITableViewDataSource {
         let tabelCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let photoInfo = self.modelController.resultsList[indexPath.row]
         tabelCell.title.text = photoInfo.title ?? ""
-        
         if let photoImage = photoInfo.image {
             tabelCell.cellImage?.image = photoImage
         } else {
@@ -79,9 +78,16 @@ extension ViewController: UITableViewDataSource {
                 //Fetch image
                 if let thumbnailURL = photoInfo.thumbnailURL {
                     self.modelController.fetchImage(fromUrl: thumbnailURL, completionHandler: { (image, error) in
-                        photoInfo.thumbnailImage = image
+//                        photoInfo.thumbnailImage = image
                         DispatchQueue.main.async {
+                            if(image == nil)
+                            {
+                                tabelCell.cellImage?.image = UIImage(named: "PlaceHolder")
+                            }
+                            else
+                            {
                             tabelCell.cellImage?.image = image
+                            }
                         }
                     })
                 }
@@ -92,13 +98,13 @@ extension ViewController: UITableViewDataSource {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        //        if !decelerate{
-        //            self.fetchAndLoadImages()
-        //        }
+                if !decelerate{
+                    self.fetchAndLoadImages()
+                }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //self.fetchAndLoadImages()
+        self.fetchAndLoadImages()
     }
 }
 

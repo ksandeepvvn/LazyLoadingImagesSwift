@@ -38,31 +38,6 @@ class PhotoModelController: NSObject {
     }
     
     func fetchJson(completionHandler:@escaping (NSError?) -> Void) {
-        //        let fetchCompletionHandler = { [weak self] (serviceResponse: ServiceResponse) -> Void in
-        //            guard self != nil  else { return }
-        //            if let error = serviceResponse.responseError {
-        //
-        //                completionHandler(error as NSError?)
-        //
-        //                Swift.print("Error while searching area = \(error.userInfo[NSLocalizedDescriptionKey] ?? "unknown")")
-        //
-        //                return
-        //            }
-        //            if let jsonArray = serviceResponse.jsonObject as? [[String:Any]] {
-        //
-        //                for jsonDict in jsonArray {
-        //                    let photosDict = PhotosModel(jsonDict: jsonDict)
-        //                    self?.resultsList.append(photosDict)
-        //                }
-        //            }
-        //            completionHandler(nil)
-        //        }
-        //        SessionManager.sharedInstance.sendServerRequest(method: .get,
-        //                                                        endPoint: "photos",
-        //                                                        completionHandler: fetchCompletionHandler)
-        //    }
-        
-        
         let requestURL: URL = URL.init(string:"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json" )!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
         let config = URLSessionConfiguration.default
@@ -72,8 +47,6 @@ class PhotoModelController: NSObject {
         let task = session.dataTask(with: urlRequest as URLRequest, completionHandler: { (data, response, error) in
             let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
-            
-            
             if (statusCode == 200) {
                 print("Everyone is fine, file downloaded successfully.")
                 do{

@@ -11,7 +11,7 @@ import UIKit
 public class PhotosModel {
     let id : String?
     let title : String?
-    //let imageURL : String?
+    let imageURL : String?
     let thumbnailURL : String?
     var image : UIImage? = nil
     var thumbnailImage : UIImage? = nil
@@ -20,5 +20,6 @@ public class PhotosModel {
         self.id = jsonDict["description"] as? String
         self.title = jsonDict["title"] as? String
         self.thumbnailURL = jsonDict["imageHref"] as? String
+        self.imageURL = jsonDict["imageHref"] as? String
     }
 }
