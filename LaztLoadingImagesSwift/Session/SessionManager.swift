@@ -238,11 +238,8 @@ public class SessionManager {
             // Call the completion handler
             completionHandler(serviceResponse)
         }
-        
         self.tasks[taskIdentifier] = task
-        
         task.resume()
-        
         return taskIdentifier
     }
     

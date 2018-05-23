@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,32 +33,45 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Blank" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-r0-IHG">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-r0-IHG">
                                                     <rect key="frame" x="15" y="15" width="150" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="AiP-cH-MsF"/>
                                                         <constraint firstAttribute="height" constant="150" id="Ym8-EW-xvJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your title goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEF-UJ-HMl">
-                                                    <rect key="frame" x="185" y="15" width="175" height="145"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Your title goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEF-UJ-HMl">
+                                                    <rect key="frame" x="16" y="0.0" width="149" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.9243826866" green="0.61461132760000003" blue="0.18127965930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Goes Here" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uVh-qT-sPe">
+                                                    <rect key="frame" x="173" y="0.0" width="195" height="180"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="bnI-i6-rwF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="PEF-UJ-HMl" firstAttribute="top" secondItem="PnE-Xg-HvG" secondAttribute="top" constant="15" id="4hU-AL-Lef"/>
+                                                <constraint firstAttribute="bottom" secondItem="uVh-qT-sPe" secondAttribute="bottom" id="FdN-nG-nza"/>
                                                 <constraint firstItem="Xge-r0-IHG" firstAttribute="top" secondItem="PnE-Xg-HvG" secondAttribute="top" constant="15" id="JVy-Pj-lny"/>
                                                 <constraint firstAttribute="bottom" secondItem="Xge-r0-IHG" secondAttribute="bottom" constant="15" id="KcM-BN-sUv"/>
-                                                <constraint firstAttribute="trailing" secondItem="PEF-UJ-HMl" secondAttribute="trailing" constant="15" id="bw2-e0-LA7"/>
+                                                <constraint firstItem="uVh-qT-sPe" firstAttribute="top" secondItem="PnE-Xg-HvG" secondAttribute="top" id="Oa1-eI-bXb"/>
+                                                <constraint firstItem="uVh-qT-sPe" firstAttribute="firstBaseline" secondItem="PEF-UJ-HMl" secondAttribute="firstBaseline" id="Zpp-mU-CwH"/>
+                                                <constraint firstAttribute="trailing" secondItem="PEF-UJ-HMl" secondAttribute="trailing" constant="210" id="bw2-e0-LA7"/>
+                                                <constraint firstAttribute="trailing" secondItem="uVh-qT-sPe" secondAttribute="trailing" constant="7" id="fly-El-PGG"/>
                                                 <constraint firstItem="Xge-r0-IHG" firstAttribute="leading" secondItem="PnE-Xg-HvG" secondAttribute="leading" constant="15" id="n83-sB-SuK"/>
-                                                <constraint firstItem="PEF-UJ-HMl" firstAttribute="leading" secondItem="Xge-r0-IHG" secondAttribute="trailing" constant="20" id="rQy-IM-gey"/>
-                                                <constraint firstAttribute="bottom" secondItem="PEF-UJ-HMl" secondAttribute="bottom" constant="19.5" id="ukn-T0-qZf"/>
+                                                <constraint firstItem="PEF-UJ-HMl" firstAttribute="leading" secondItem="Xge-r0-IHG" secondAttribute="trailing" constant="-149" id="rQy-IM-gey"/>
+                                                <constraint firstItem="uVh-qT-sPe" firstAttribute="leading" secondItem="PEF-UJ-HMl" secondAttribute="trailing" constant="8" id="xgi-U1-kTc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cellImage" destination="Xge-r0-IHG" id="6L7-RP-jre"/>
+                                            <outlet property="descriptionText" destination="uVh-qT-sPe" id="1gT-Gc-RPK"/>
                                             <outlet property="title" destination="PEF-UJ-HMl" id="oox-bJ-Clj"/>
                                         </connections>
                                     </tableViewCell>
@@ -92,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112.8" y="-123.68815592203899"/>
+            <point key="canvasLocation" x="111.2" y="-124.58770614692655"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="0rC-vs-gnT">
@@ -144,6 +158,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Blank" width="22" height="22"/>
+        <image name="PlaceHolder" width="240" height="240"/>
     </resources>
 </document>

@@ -121,6 +121,7 @@ extension ViewController: UITableViewDataSource {
         let tabelCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let photoInfo = self.modelController.resultsList[indexPath.row]
         tabelCell.title.text = photoInfo.title ?? ""
+        tabelCell.descriptionText.text = photoInfo.id ?? ""
         if let photoImage = photoInfo.image {
             tabelCell.cellImage?.image = photoImage
         } else {
