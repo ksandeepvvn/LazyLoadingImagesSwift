@@ -2,6 +2,9 @@
 Text/Plain Format Response Handling, Pull To Refresh, MVVM Patren
 StoryBoard
 Image Lazy Loading.
-ProtoType Cell.
-No Third Party Libraries.
-Table View
+Third Party Libraries: None Used.
+Programing Language : Swift 4.0
+Activity Indication.
+Screen Shots added
+
+
