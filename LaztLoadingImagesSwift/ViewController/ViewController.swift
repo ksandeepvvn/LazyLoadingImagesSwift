@@ -20,17 +20,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Defining TableView Height
+        
         self.tableView.estimatedRowHeight = 180
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
+        //Activity Indicator Initiating
         self.activityIndicator.startAnimating()
         self.activityIndicator.tintColor = UIColor.red
         
-        
+        //Initialising Refresh Controller
         refreshControl = UIRefreshControl()
         tableView.addSubview(refreshControl)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull To Referesh")
         refreshControl.tintColor = UIColor.red
         refreshControl.addTarget(self, action: #selector(Refresh), for: .valueChanged)
+        
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -47,6 +53,8 @@ class ViewController: UIViewController {
         })
     }
     
+    
+    //Pull To Refresh
     @objc func Refresh()
     {
         tableView.reloadData()
@@ -77,13 +85,13 @@ class ViewController: UIViewController {
                             //Loading Image Asynchronusly
                                 
                                 DispatchQueue.main.async {
-                                if(image == nil)
+                                if(image == nil )
                                 {
                                     //loading Default Image
                                  cell.cellImage?.image = UIImage(named: "PlaceHolder")
                                     }
                                     else
-                                {
+                                    {
                                     cell.cellImage?.image = image
                                     }
                                 }
@@ -106,6 +114,9 @@ extension ViewController: UITableViewDataSource {
         return self.modelController.resultsList.count
     }
     
+    
+    //Table View Delegate Methods
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tabelCell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let photoInfo = self.modelController.resultsList[indexPath.row]
@@ -127,6 +138,7 @@ extension ViewController: UITableViewDataSource {
         return tabelCell
     }
     
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
                 if !decelerate{
                     self.fetchAndLoadImages()
@@ -138,8 +150,9 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
+
+
 extension ViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if let imageVC  = self.storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController{
@@ -148,7 +161,6 @@ extension ViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(imageVC, animated: true)
         }
     }
-    
 }
 
 extension UIImageView {

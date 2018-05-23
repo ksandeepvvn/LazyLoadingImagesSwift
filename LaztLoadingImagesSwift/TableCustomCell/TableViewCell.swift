@@ -8,19 +8,22 @@
 
 import Foundation
 import UIKit
+
+
+
 class TableViewCell: UITableViewCell {
-    
     @IBOutlet weak var cellImage: UIImageView!
-    
     @IBOutlet weak var title: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    //Handling Images Overriding 
+    
     override func prepareForReuse()
  {
         super.prepareForReuse()
-    self.cellImage .resignFirstResponder()
+    self.cellImage.resignFirstResponder()
     }
     
 }

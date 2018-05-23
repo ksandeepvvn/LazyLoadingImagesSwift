@@ -15,6 +15,7 @@ class ImageViewController: UIViewController {
     
     var modelController = PhotoModelController()
     var selectedIndex: Int!
+
     
     
     override func viewDidLoad() {
@@ -38,10 +39,14 @@ class ImageViewController: UIViewController {
         }
     }
     
+    //Delete Function
+    
     func addDeleteButton(){
         let deleteButton =  UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(self.deletEntry))
         self.navigationItem.rightBarButtonItem = deleteButton
     }
+    
+    //Removing Object at Particular Index
     
     @objc func deletEntry()  {
         self.modelController.resultsList.remove(at: self.selectedIndex)

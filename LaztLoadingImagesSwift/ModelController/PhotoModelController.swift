@@ -33,6 +33,8 @@ class PhotoModelController: NSObject {
                                                         completionHandler: fetchImageCompletionHandler)
     }
     
+    
+    
     func fetchJson(completionHandler:@escaping (NSError?) -> Void) {
         let requestURL: URL = URL.init(string:"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json" )!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
@@ -44,7 +46,7 @@ class PhotoModelController: NSObject {
             let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
             if (statusCode == 200) {
-                print("Everyone is fine, file downloaded successfully.")
+                print("Downloaded Successfully")
                 do{
                     let tempStr:String = NSString(data: data!, encoding: 8)! as String
                     let newData = tempStr.data(using: .utf8)

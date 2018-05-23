@@ -16,6 +16,8 @@ public class PhotosModel {
     var image : UIImage? = nil
     var thumbnailImage : UIImage? = nil
     
+    //Mapping the Resulted Response 
+    
     init(jsonDict : [String:Any]) {
         self.id = jsonDict["description"] as? String
         self.title = jsonDict["title"] as? String
