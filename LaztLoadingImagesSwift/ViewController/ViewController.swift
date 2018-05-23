@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         self.activityIndicator.startAnimating()
         self.activityIndicator.tintColor = UIColor.red
         
+        
         refreshControl = UIRefreshControl()
         tableView.addSubview(refreshControl)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull To Referesh")
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         
         self.modelController.fetchJson(completionHandler: { [weak self](error) in
             guard let strongSelf = self else {
@@ -66,11 +68,18 @@ class ViewController: UIViewController {
                 let photoInfo = self.modelController.resultsList[indexPath.row]
                 if photoInfo.thumbnailImage == nil {
                     if let cell = self.tableView.cellForRow(at: indexPath) as? TableViewCell {
+                        
+                        if((photoInfo.thumbnailURL != nil))
+                        {
                         if let thumbnailURL = photoInfo.thumbnailURL {
                             self.modelController.fetchImage(fromUrl: thumbnailURL, completionHandler: { (image, error) in
+                                
+                            //Loading Image Asynchronusly
+                                
                                 DispatchQueue.main.async {
                                 if(image == nil)
                                 {
+                                    //loading Default Image
                                  cell.cellImage?.image = UIImage(named: "PlaceHolder")
                                     }
                                     else
@@ -79,6 +88,11 @@ class ViewController: UIViewController {
                                     }
                                 }
                             })
+                        }
+                        }
+                        else
+                        {
+                            cell.cellImage?.image = UIImage(named: "PlaceHolder")
                         }
                     }
                 }
@@ -103,17 +117,8 @@ extension ViewController: UITableViewDataSource {
                 //Fetch image
                 if let thumbnailURL = photoInfo.thumbnailURL {
                     self.modelController.fetchImage(fromUrl: thumbnailURL, completionHandler: { (image, error) in
-//                        photoInfo.thumbnailImage = image
-                        DispatchQueue.main.async {
-                            if(image == nil)
-                            {
-                                tabelCell.cellImage?.image = UIImage(named: "PlaceHolder")
-                            }
-                            else
-                            {
-                            tabelCell.cellImage?.image = image
-                            }
-                        }
+                        tabelCell.cellImage?.image = UIImage(named: "PlaceHolder")
+                        tabelCell.cellImage.downloadImageFrom(link: thumbnailURL, contentMode: UIViewContentMode.scaleAspectFit)
                     })
                 }
             }
@@ -145,6 +150,19 @@ extension ViewController: UITableViewDelegate {
     }
     
 }
+
+extension UIImageView {
+    func downloadImageFrom(link:String, contentMode: UIViewContentMode) {
+        URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {
+            (data, response, error) -> Void in
+            DispatchQueue.main.async() {
+                self.contentMode =  contentMode
+                if let data = data { self.image = UIImage(data: data) }
+            }
+        }).resume()
+    }
+}
+
 
 
 

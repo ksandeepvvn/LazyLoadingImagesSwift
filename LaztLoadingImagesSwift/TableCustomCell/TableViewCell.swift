@@ -17,4 +17,10 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    override func prepareForReuse()
+ {
+        super.prepareForReuse()
+    self.cellImage .resignFirstResponder()
+    }
+    
 }
